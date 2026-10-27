@@ -17,6 +17,14 @@ let misiones = [];
 
 formulario.addEventListener("submit", (evento) => {
   evento.preventDefault(); // Evita que el formulario recargue la página.
+  
+  const datos = new FormData(formulario);
+  // Convertimos a objeto para manipular fácilmente
+  const valores = {};
+    datos.forEach((valor, clave) => {
+      valores[clave] = valor;
+    });
+  misiones.push(valores);
   agregarMision();
 });
 
@@ -25,6 +33,14 @@ botonBorrar.addEventListener("click", borrarTodo);
 function agregarMision() {
   // TODO
   // crear objeto misión, incluir los valores de los campos y un id único
+  localStorage.setItem("misiones", JSON.stringify(misiones));
+
+  let dato = JSON.parse(localStorage.getItem("misiones"));
+  let i = 0;
+  while (i < dato) {
+    console.log(dato[i]);
+    i++;
+  }
 }
 
 function mostrarMisiones() {
@@ -37,6 +53,8 @@ function mostrarMisiones() {
 
   // TODO: Recorre el array misiones y llama a mostrarMision(mision)
   // para cada misión.
+
+
 }
 
 function mostrarMision(mision) {
